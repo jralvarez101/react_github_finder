@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import UserItem from "./UserItem";
-import Spinner from "../components/layout/Spinner";
+import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
 
 const Users = ({ users, loading }) => {
