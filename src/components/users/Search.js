@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
+import GithubContext from "../../context/github/githubContext";
 
-const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
+const Search = ({ showClear, clearUsers, setAlert }) => {
+  // initialize Github context
+  const githubContext = useContext(GithubContext);
+
   // input usually has a state attached to the input and you also must add an onchange event.
   const [text, setText] = useState("");
 
@@ -17,7 +21,7 @@ const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
       setAlert("Please enter something", "light");
     } else {
       // In this case we will be passing the state in the form of props up to the main component (App.js)
-      searchUsers(text);
+      githubContext.searchUsers(text);
       //reset state to nothing after it is submitted
       setText("");
     }
@@ -50,7 +54,6 @@ const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
 };
 
 Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired,
   clearUsers: PropTypes.func.isRequired,
   showClear: PropTypes.bool.isRequired,
   setAlert: PropTypes.func.isRequired,

@@ -17,19 +17,6 @@ const App = () => {
   const [loading, setLoading] = useState(null);
   const [alert, setAlert] = useState(null);
 
-  //This function was called inside the Search component and then passed up here as a prop where it
-  // takes the "text" state
-  const searchUsers = async (text) => {
-    setLoading(true);
-    // fetch the data
-    const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    );
-    // set state to false since it already fetched the data and set users to the new data
-    setUsers(res.data.items);
-    setLoading(false);
-  };
-
   // Get single Github User
   const getUser = async (username) => {
     setLoading(true);
@@ -82,7 +69,6 @@ const App = () => {
                 render={(props) => (
                   <Fragment>
                     <Search
-                      searchUsers={searchUsers}
                       clearUsers={clearUsers}
                       showClear={users.length > 0 ? true : false}
                       setAlert={showAlert}
