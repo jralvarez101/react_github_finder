@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import PropTypes from "prop-types";
 import GithubContext from "../../context/github/githubContext";
+import AlertContext from "../../context/alert/alertContext";
 
-const Search = ({ setAlert }) => {
+const Search = () => {
   // initialize Github context
   const githubContext = useContext(GithubContext);
+  const alertContext = useContext(AlertContext);
 
   // input usually has a state attached to the input and you also must add an onchange event.
   const [text, setText] = useState("");
@@ -18,7 +19,7 @@ const Search = ({ setAlert }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (text === "") {
-      setAlert("Please enter something", "light");
+      alertContext.setAlert("Please enter something", "light");
     } else {
       // In this case we will be passing the state in the form of props up to the main component (App.js)
       githubContext.searchUsers(text);
@@ -54,10 +55,6 @@ const Search = ({ setAlert }) => {
       )}
     </div>
   );
-};
-
-Search.propTypes = {
-  setAlert: PropTypes.func.isRequired,
 };
 
 export default Search;
